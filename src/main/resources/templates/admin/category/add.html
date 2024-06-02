@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header th:replace="admin/fragments/header :: header"></header>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <header th:replace="admin/fragments/sidebar :: sidebar"></header>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Quản lý danh mục
+                <small>Tại đây</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#"></a></li>
+                <li class="active"></li>
+            </ol>
+        </section>
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Thêm</h3>
+                </div>
+
+                <form role="form" method="post" th:action="@{/admin/add-category}" th:object="${category}">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="categoryName">Tên Danh Mục</label>
+                            <input type="text" class="form-control" id="categoryName" th:field="*{categoryName}">
+                        </div>
+                        <label for="categoryStatus">Trạng thái danh mục</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="categoryStatusActive" value="true" th:field="*{categoryStatus}"/>
+                                <label class="form-check-label" for="categoryStatusActive">Hiện</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="categoryStatusHidden" value="false" th:field="*{categoryStatus}"/>
+                                <label class="form-check-label" for="categoryStatusHidden">Ẩn</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Gửi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <section class="content">
+            <!-- Additional content can go here -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<div th:replace="admin/fragments/script :: script"></div>
+</body>
+</html>
