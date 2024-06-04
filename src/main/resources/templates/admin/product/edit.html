@@ -19,44 +19,55 @@
     <!-- Tiêu đề nội dung (Tiêu đề trang) -->
     <section class="content-header">
       <h1>
-        Trang sửa
+        Trang trống
         <small>mọi thứ bắt đầu từ đây</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
         <li><a href="#">Ví dụ</a></li>
-        <li class="active"> Trang sửa</li>
+        <li class="active">Trang trống</li>
       </ol>
     </section>
+
     <div class="col-md-6">
       <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">Ví dụ nhanh</h3>
         </div>
 
-        <form role="form" method="post" th:action="@{/admin/edit-category}" th:object="${category}">
-          <input type="hidden" class="form-control" id="categoryName1" th:field="*{id}">
+        <form role="form" method="post" th:action="@{/admin/product-edit}" th:object="${product}" enctype="multipart/form-data">
+          <input type="hidden" class="form-control" id="productID" th:field="*{id}">
+          <input type="hidden" class="form-control" id="productImage1" th:field="*{image}">
           <div class="box-body">
             <div class="form-group">
-              <label for="categoryName">Tên danh mục</label>
-              <input type="text" class="form-control" id="categoryName" th:field="*{categoryName}">
+              <label for="categoryName1">Tên Sản Phẩm</label>
+              <input type="text" class="form-control" id="productName" th:field="*{productName}">
             </div>
-            <label for="categoryStatus">Trạng thái danh mục</label>
-            <div>
-              <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="categoryStatusActive" value="true" th:field="*{categoryStatus}"/>
-                <label class="form-check-label" for="categoryStatusActive">Hoạt động</label>
-              </div>
-
-              <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="categoryStatusHidden" value="false" th:field="*{categoryStatus}"/>
-                <label class="form-check-label" for="categoryStatusHidden">Ẩn</label>
-              </div>
+            <div class="form-group">
+              <label for="categoryName2">Giá</label>
+              <input type="text" class="form-control" id="productPrice" th:field="*{price}">
+            </div>
+            <div class="form-group">
+              <label for="categoryName3">Hình Ảnh</label>
+              <input type="file" class="form-control" id="productImage" name="fileImage" multiple>
+              <img th:src="@{'/uploads/'+${product.image}}" width="150px" alt="User Image">
+            </div>
+            <div class="form-group">
+              <label for="categoryName4">Danh mục</label>
+              <select class="form-control select2 select2-hidden-accessible" style="width: 100%;"
+                      th:field="*{category.id}">
+                <option th:each="category : ${listCate}" th:value="${category.id}"
+                        th:text="${category.categoryName}"></option>
+              </select>
             </div>
           </div>
-
+          <div class="form-group">
+            <label for="categoryName5">Mô tả sản phẩm</label>
+            <textarea name="editor1" id="editor1" rows="5" cols="80" th:field="*{description}">
+                    </textarea>
+          </div>
           <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <button type="submit" class="btn btn-primary">Sửa</button>
           </div>
         </form>
       </div>
@@ -76,5 +87,9 @@
 
 <!-- jQuery 3 -->
 <div th:replace="admin/fragments/script :: script"></div>
+<script src="//cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'editor1' );
+</script>
 </body>
 </html>

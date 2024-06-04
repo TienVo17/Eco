@@ -3,6 +3,9 @@ package com.tienvo17.services;
 import com.tienvo17.models.Category;
 import com.tienvo17.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,5 +54,16 @@ public class CategoryServiceImpl implements CategoryService{
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Category> searchCategory(String kw) {
+        return this.categoryRepository.searchCategory(kw);
+    }
+
+    @Override
+    public Page<Category> getAll(int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo-1,3);
+        return this.categoryRepository.findAll(pageable);
     }
 }

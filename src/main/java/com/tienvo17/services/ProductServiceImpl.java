@@ -28,13 +28,19 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Category findById(int id) {
-        return null;
+    public Product findById(int id) {
+        return this.productRepository.findById(id).get();
     }
 
     @Override
     public Boolean update(Product product) {
-        return null;
+        try{
+            this.productRepository.save(product);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

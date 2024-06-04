@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProductService {
     List<Product> getAll();
     Boolean create(Product product);
-    Category findById(int id);
+    Product findById(int id);
     Boolean update(Product product);
     Boolean delete(int id);
 }
